@@ -1,0 +1,9 @@
+create table marks(rollno varchar(20),name varchar(20),eng_mark int,maths_mark int, python_mark int );
+insert into marks values('24bit026','koushik',45,54,55);
+insert into marks values('24bit022','sam',65,12,78);
+insert into marks values('24bit016','gokul',32,65,48);
+alter table marks add total int;
+update marks set total =eng_mark+maths_mark+python_mark;
+alter table marks add percentage decimal(5,2);
+update marks set percentage =(total*100)/300;
+select *from marks;
