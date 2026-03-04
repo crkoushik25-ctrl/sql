@@ -1,0 +1,176 @@
+create table studentcourse(st_id number,
+st_name varchar(15),coursename varchar(10),
+totalmarks number,percentage number);
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 15
+Enter value for st_name: ARSHAD
+Enter value for coursename: BIT
+Enter value for totalmarks: 455
+Enter value for percentage: 85
+old   1: insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1: insert into studentcourse values(15,'ARSHAD','BIT',455,85)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 18
+Enter value for st_name: RAM
+Enter value for coursename: BCS
+Enter value for totalmarks: 350
+Enter value for percentage: 70
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(18,'RAM','BCS',350,70)
+
+ insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 43
+Enter value for st_name: INSAF
+Enter value for coursename: BCS
+Enter value for totalmarks: 385
+Enter value for percentage: 75
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(43,'INSAF','BCS',385,75)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 61
+Enter value for st_name: AJAY
+Enter value for coursename: BCT
+Enter value for totalmarks: 400
+Enter value for percentage: 80
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(61,'AJAY','BCT',400,80)
+
+
+ insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 66
+Enter value for st_name: MANI
+Enter value for coursename: BCA
+Enter value for totalmarks: 490
+Enter value for percentage: 90
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(66,'MANI','BCA',490,90)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 22
+Enter value for st_name: SAM
+Enter value for coursename: BCT
+Enter value for totalmarks: 400
+Enter value for percentage: 80
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(22,'SAM','BCT',400,80)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 38
+Enter value for st_name: SIVA
+Enter value for coursename: BCA
+Enter value for totalmarks: 280
+Enter value for percentage: 50
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(38,'SIVA','BCA',280,50)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 44
+Enter value for st_name: GOKUL
+Enter value for coursename: BIT
+Enter value for totalmarks: 222
+Enter value for percentage: 40
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(44,'GOKUL','BIT',222,40)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 41
+Enter value for st_name: MIKE
+Enter value for coursename: BCS
+Enter value for totalmarks: 300
+Enter value for percentage: 60
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(41,'MIKE','BCS',300,60)
+
+insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage);
+Enter value for st_id: 38
+Enter value for st_name: VIJAY
+Enter value for coursename: BCT
+Enter value for totalmarks: 200
+Enter value for percentage: 40
+old   1:  insert into studentcourse values(&st_id,'&st_name','&coursename',&totalmarks,&percentage)
+new   1:  insert into studentcourse values(38,'VIJAY','BCT',200,40)
+
+
+ set serveroutput on
+ create or replace procedure st_report(coursenameinput in varchar2 )
+  
+    is countfirstclass number :=0;
+    countsecondclass number :=0;
+    countthirdclass number :=0;
+    countfail number :=0;
+  
+    begin
+    select
+   count(case when percentage between 70 and 100 then 1 end),
+   count(case when percentage between 60 and 69 then 1 end),
+  count(case when percentage between 50 and 59 then 1 end),
+   count(case when percentage <49 then 1 end)
+   into countfirstclass,countsecondclass,countthirdclass,countfail
+   from studentcourse
+   where coursename=coursenameinput;
+ 
+  dbms_output.put_line('----------STUDENT PERCENTAGE----------');
+   dbms_output.put_line('COURSE NAME:'||coursenameinput);
+   dbms_output.put_line('100-70%:'||countfirstclass);
+   dbms_output.put_line('69-60%:'||countsecondclass);
+   dbms_output.put_line('59-50%:'||countthirdclass);
+  dbms_output.put_line('BELOW 49%:'||countfail);
+   dbms_output.put_line('--------------------------------------');
+   end;
+   /
+
+Procedure created.
+
+
+
+
+ exec st_report('BIT');
+
+----------STUDENT PERCENTAGE----------
+COURSE NAME:BIT
+100-70%:1
+69-60%:0
+59-50%:0
+BELOW 49%:1
+--------------------------------------------------
+
+PL/SQL procedure successfully completed.
+
+SQL>  exec st_report('BCS');
+
+----------STUDENT PERCENTAGE----------
+COURSE NAME:BCS
+100-70%:2
+69-60%:1
+59-50%:0
+BELOW 49%:0
+--------------------------------------------------
+
+PL/SQL procedure successfully completed.
+
+SQL>  exec st_report('BCT');
+
+----------STUDENT PERCENTAGE----------
+COURSE NAME:BCT
+100-70%:2
+69-60%:0
+59-50%:0
+BELOW 49%:1
+--------------------------------------------------
+
+PL/SQL procedure successfully completed.
+
+SQL>  exec st_report('BCA');
+
+----------STUDENT PERCENTAGE----------
+COURSE NAME:BCA
+100-70%:1
+69-60%:0
+59-50%:1
+BELOW 49%:0
+--------------------------------------------------
+
+PL/SQL procedure successfully completed.

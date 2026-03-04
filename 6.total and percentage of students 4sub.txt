@@ -1,0 +1,74 @@
+TOTAL AND PERCENTAGE OF STUDENTS USING PL/SQL
+
+ set serveroutput on;
+ accept sname char prompt 'ENTER STUDENT NAME:'
+ENTER STUDENT NAME:koushik
+accept sclass char prompt 'ENTER CLASS:'
+ENTER CLASS:IT
+ accept mark1 number prompt 'ENTER MARK FOR SUBJECT 1:'
+ENTER MARK FOR SUBJECT 1:56
+ accept mark2 number prompt 'ENTER MARK FOR SUBJECT 2:'
+ENTER MARK FOR SUBJECT 2:68
+ accept mark3 number prompt 'ENTER MARK FOR SUBJECT 3:'
+ENTER MARK FOR SUBJECT 3:67
+ accept mark4 number prompt 'ENTER MARK FOR SUBJECT 4:'
+ENTER MARK FOR SUBJECT 4:80
+
+ declare
+    v_name varchar(15):='&sname';
+    v_class varchar(10):='&sclass';
+    mark1 number:=&mark1;
+    mark2 number:=&mark2;
+    mark3 number:=&mark3;
+    mark4 number:=&mark4;
+   total number;
+    percentage number;
+ 
+  begin
+   total:=mark1+mark2+mark3+mark4;
+   percentage:=(total/400)*100;
+ 
+   dbms_output.put_line('----------MARK SHEET----------');
+   dbms_output.put_line('NAME:'||v_name);
+   dbms_output.put_line('CLASS:'||v_class);
+    dbms_output.put_line('-----------------------------');
+    dbms_output.put_line('SUBJECT 1 MARK:'||mark1);
+   dbms_output.put_line('SUBJECT 2 MARK:'||mark2);
+   dbms_output.put_line('SUBJECT 3 MARK:'||mark3);
+   dbms_output.put_line('SUBJECT 4 MARK:'||mark4);
+   dbms_output.put_line('------------------------------');
+   dbms_output.put_line('TOTAL MARK:'||total);
+   dbms_output.put_line('PERCENTAGE:'||percentage||'%');
+   dbms_output.put_line('------------------------------');
+   end;
+  /
+
+old   2: v_name varchar(15):='&sname';
+new   2: v_name varchar(15):='koushik';
+old   3: v_class varchar(10):='&sclass';
+new   3: v_class varchar(10):='IT';
+old   4: mark1 number:=&mark1;
+new   4: mark1 number:=        87;
+old   5: mark2 number:=&mark2;
+new   5: mark2 number:=        69;
+old   6: mark3 number:=&mark3;
+new   6: mark3 number:=        58;
+old   7: mark4 number:=&mark4;
+new   7: mark4 number:=        75;
+
+
+
+----------MARK SHEET----------
+NAME:koushik
+CLASS:IT
+-----------------------------
+SUBJECT 1 MARK:87
+SUBJECT 2 MARK:69
+SUBJECT 3 MARK:58
+SUBJECT 4 MARK:75
+------------------------------
+TOTAL MARK:289
+PERCENTAGE:72.25%
+------------------------------
+
+PL/SQL procedure successfully completed.

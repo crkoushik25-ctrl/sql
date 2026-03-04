@@ -1,0 +1,128 @@
+create table works(emp_no number,cmp_name varchar(15),join_date date,desg varchar(15),
+salary number,dep_no number);
+insert into works values(&emp_no,'&cmp_name','&join_date','&desg',&salary,&dep_no);
+
+Enter value for emp_no: 1
+Enter value for cmp_name: YAHOO
+Enter value for join_date: 15-JAN-2024
+Enter value for desg: MANAGER
+Enter value for salary: 30000
+Enter value for dep_no: 1
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&s
+alary,&dep_no)
+new 1: insert into works values(1,'YAHOO','15-JAN-
+2024','MANAGER',30000,1)
+1 row created.
+SQL> /
+Enter value for emp_no: 2
+Enter value for cmp_name: INFOSYS
+Enter value for join_date: 10-AUG-2024
+Enter value for desg: HR
+Enter value for salary: 35000
+Enter value for dep_no: 2
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&s
+alary,&dep_no)
+new 1: insert into works values(2,'INFOSYS','10-AUG-
+2024','HR',35000,2)
+1 row created.
+SQL> /
+Enter value for emp_no: 3
+Enter value for cmp_name: INTEL
+Enter value for join_date: 15-MAY-2025
+Enter value for desg: PROJECT MANAGER
+Enter value for salary: 40000
+Enter value for dep_no: 2
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&s
+alary,&dep_no)
+new 1: insert into works values(3,'INTEL','15-MAY-
+2025','PROJECT MANAGER',40000,2)
+
+SQL> /
+Enter value for emp_no: 4
+Enter value for cmp_name: ORACLE
+Enter value for join_date: 08-FEB-2025
+Enter value for desg: PROGRAMMER
+Enter value for salary: 20000
+Enter value for dep_no: 1
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&
+salary,&dep_no)
+new 1: insert into works values(4,'ORACLE','08-FEB-
+2025','PROGRAMMER',20000,1)
+1 row created.
+SQL> /
+Enter value for emp_no: 5
+Enter value for cmp_name: HCL
+Enter value for join_date: 22-JULY-2025
+Enter value for desg: TESTER
+Enter value for salary: 25000
+Enter value for dep_no: 1
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&
+salary,&dep_no)
+new 1: insert into works values(5,'HCL','22-JULY-
+2025','TESTER',25000,1)
+1 row created.
+SQL> /
+Enter value for emp_no: 6
+Enter value for cmp_name: TCS
+Enter value for join_date: 30-JUNE-2025
+Enter value for desg: MANAGER
+Enter value for salary: 30000
+Enter value for dep_no: 2
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&
+salary,&dep_no)
+new 1: insert into works values(6,'TCS','30-JUNE-
+2025','MANAGER',30000,2)
+1 row created.
+
+SQL> /
+Enter value for emp_no: 7
+Enter value for cmp_name: ZOHO
+Enter value for join_date: 15-JUNE-2025
+Enter value for desg: DEVELOPER
+Enter value for salary: 40000
+Enter value for dep_no: 3
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&
+salary,&dep_no)
+new 1: insert into works values(7,'ZOHO','15-JUNE-
+2025','DEVELOPER',40000,3)
+
+SQL> /
+Enter value for emp_no: 8
+Enter value for cmp_name: WIPRO
+Enter value for join_date: 25-NOV-2025
+Enter value for desg: PROJRCT MANAGER
+Enter value for salary: 20000
+Enter value for dep_no: 1
+old 1: insert into works
+values(&emp_no,'&cmp_name','&join_date','&desg',&
+salary,&dep_no)
+new 1: insert into works values(8,'WIPRO','25-NOV-
+2025','PROJRCT MANAGER',20000,1)
+
+set serveroutput on
+create or replace function tot_sal(dno number)
+return number
+is
+totsal number:=0;
+ begin
+select sum(salary)into totsal from works where dep_no=dno;
+return totsal;
+end;
+/
+
+begin
+dbms_output.put_line('TOTAL SALARY OF DEPARTMENT NUMBER 1 IS:'||tot_sal(1));
+dbms_output.put_line('TOTAL SALARY OF DEPARTMENT NUMBER 2 IS:'||tot_sal(2));
+dbms_output.put_line('TOTAL SALARY OF DEPARTMENT NUMBER 3 IS:'||tot_sal(3));
+
+end ;
+/
+
+

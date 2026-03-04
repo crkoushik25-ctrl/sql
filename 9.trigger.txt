@@ -1,0 +1,25 @@
+create table employee(salary varchar(10),name varchar(20));
+insert into employee values('30000','koushik');
+
+create table update_table(new_name varchar(10), old_name varchar(10),new_salary varchar(10),old_salary varchar(10));
+
+
+create or replace trigger show
+    before update on employee
+    for each row
+    begin
+    dbms_output.put_line('THE OLD NAME WAS:');
+    dbms_output.put_line(:old.name);
+    dbms_output.put_line('THE UPDATE NEW NAME IS:');
+    dbms_output.put_line(:new.name);
+    dbms_output.put_line('THE OLD SALARY WAS:');
+   dbms_output.put_line(:old.salary);
+   dbms_output.put_line('THE UPDATE NEW SALARY IS:');
+   dbms_output.put_line(:new.salary);
+   insert into update_table(new_name,old_name,new_salary,old_salary)
+   values(:new.name,:old.name,:new.salary,:old.salary);
+   end;
+   /
+update employee set salary='60000',name='eren' where name='koushik';
+
+ select *from update_table;
