@@ -1,0 +1,80 @@
+create table tran (t_id int,amount int,c_cid int);
+
+insert into tran values(223,500,26);
+insert into tran values(224,600,17);
+insert into tran values(225,700,16);
+insert into tran values(225,800,88);
+
+create table cust(c_id int,name varchar(20));
+insert into cust values(26,'heisenberg');
+insert into cust values(17,'walterwhite');
+insert into cust values(16,'jesse pinkman');
+insert into cust values(88,'jackiechan');
+
+select *from cust;
+
+select *from tran;
+
+inner join 
+select *from tran join cust on tran.c_cid = cust.c_id;
+
+left join
+
+INSERT INTO tran VALUES (201, 3000, NULL);
+
+select *from tran left join cust on tran.c_cid = cust.c_id;
+
+right join
+
+insert into cust values(null,'brucelee');
+
+select *from tran right join cust on tran.c_cid=cust.c_id;
+
+insert from already table
+
+CREATE TABLE table1 (
+EID INT,
+ENAME VARCHAR(20),
+SAL INT
+);
+INSERT INTO table1 VALUES (1,'eren',5000);
+INSERT INTO table1 VALUES (2,'mikasa',35000);
+INSERT INTO table1 VALUES (3,'GOKUl',6000);
+INSERT INTO table1 VALUES (4,'ram',5060);
+SELECT *from table1;
+
+CREATE TABLE table2 (
+EID INT,
+ENAME VARCHAR(20),
+SAL INT
+);
+
+INSERT INTO table2 SELECT * FROM table1;
+SELECT * FROM table2;
+
+orderby,groupby
+
+create table mark(name varchar(20),mark int,department varchar(20));
+
+insert into mark values('ben10',75,'CSE');
+insert into mark values('raju',65,'ECE');
+insert into mark values('jagu',50,'IT');
+insert into mark values('bheem',80,'CSE');
+insert into mark values('tom',100,'ECE');
+insert into mark values('jerry',90,'IT');
+insert into mark values('shinchan',54,'CSE');
+insert into mark values('doremon',99,'ECE');
+insert into mark values('nobita',10,'IT');
+
+
+orderby
+
+select *from mark order by mark desc
+select *from mark order by mark;
+
+groupby
+
+select sum(mark),department from mark group by department;
+ select count(name),department from mark group by department;
+SELECT MIN(mark), department FROM mark GROUP BY department;
+SELECT max(mark), department FROM mark GROUP BY department;
