@@ -1,0 +1,84 @@
+CREATE TABLE ACTOR (
+  Actid NUMBER PRIMARY KEY,
+  Actname VARCHAR2(50),
+  Actgender VARCHAR2(10)
+);
+
+CREATE TABLE DIRECTOR (
+  Dirid NUMBER PRIMARY KEY,
+  Dirname VARCHAR2(50),
+  Dirphone NUMBER
+);
+
+CREATE TABLE MOVIES (
+  Movid NUMBER PRIMARY KEY,
+  Movtitle VARCHAR2(100),
+  Movyear NUMBER,
+  Movlang VARCHAR2(20),
+  Dirid NUMBER,
+  FOREIGN KEY (Dirid) REFERENCES DIRECTOR(Dirid)
+);
+
+CREATE TABLE RATING (
+  Movid NUMBER,
+  Revstars NUMBER,
+  FOREIGN KEY (Movid) REFERENCES MOVIES(Movid)
+);
+
+
+CREATE TABLE MOVIE_CAST (
+  Movid NUMBER,
+  Actid NUMBER,
+  FOREIGN KEY (Movid) REFERENCES MOVIES(Movid),
+  FOREIGN KEY (Actid) REFERENCES ACTOR(Actid)
+);
+
+INSERT INTO ACTOR VALUES (1, 'Leonardo DiCaprio', 'Male');
+INSERT INTO ACTOR VALUES (2, 'Kate Winslet', 'Female');
+INSERT INTO ACTOR VALUES (3, 'Tom Hanks', 'Male');
+INSERT INTO ACTOR VALUES (4, 'Meryl Streep', 'Female');
+select *from actor
+
+INSERT INTO DIRECTOR VALUES (1, 'Alfred Hitchcock', 987654321);
+INSERT INTO DIRECTOR VALUES (2, 'Steven Spielberg', 912345678);
+INSERT INTO DIRECTOR VALUES (3, 'Christopher Nolan', 998877665);
+select *from director
+
+INSERT INTO MOVIES VALUES (101, 'Psycho', 1960, 'English', 1);
+INSERT INTO MOVIES VALUES (102, 'Vertigo', 1958, 'English', 1);
+INSERT INTO MOVIES VALUES (103, 'Jurassic Park', 1993, 'English', 2);
+INSERT INTO MOVIES VALUES (104, 'The Post', 2017, 'English', 2);
+INSERT INTO MOVIES VALUES (105, 'Inception', 2010, 'English', 3);
+select *from values
+
+INSERT INTO RATING VALUES (101, 5);
+INSERT INTO RATING VALUES (102, 4);
+INSERT INTO RATING VALUES (103, 5);
+INSERT INTO RATING VALUES (104, 3);
+INSERT INTO RATING VALUES (105, 5);
+select *from rating
+
+INSERT INTO MOVIE_CAST VALUES (101, 1);
+INSERT INTO MOVIE_CAST VALUES (102, 1);
+INSERT INTO MOVIE_CAST VALUES (103, 3);
+INSERT INTO MOVIE_CAST VALUES (104, 4);
+INSERT INTO MOVIE_CAST VALUES (105, 1);
+INSERT INTO MOVIE_CAST VALUES (104, 1);
+select *form movie_cast
+
+
+A.
+select movtitle from movies join director using (dirid) where dirname='Alfred Hitchcock';
+
+B.
+ select distinct movtitle from movies join movie_cast using (movid) where actid in (select  actid from movie_cast group by actid having count(movid)>=2);
+
+C. select distinct actname from actor
+  2         where actid in
+  3      (select actid from movie_cast join movies using (movid) where movyear<2000) and actid in (select actid from movie_cast join movies using (movid) where movyear>2015);
+
+D.
+select movtitle,max(revstars) from movies join rating using (movid) group by movid,movtitle having max(revstars)>0;
+
+E.
+update rating set revstars=5 where movid in (select movid from movies join director using (dirid) where dirname='Steven Spielberg');
