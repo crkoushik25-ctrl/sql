@@ -1,0 +1,11 @@
+create table marks(rollno varchar(20),name varchar(20),eng_mark int,maths_mark int, python_mark int,rdbms_mark int );
+insert into marks values('24bit026','koushik',45,54,55,65);
+insert into marks values('24bit022','fazil',65,12,78,85);
+insert into marks values('24bit016','nancy',32,65,48,45);
+alter table marks add total int;
+update marks set total =eng_mark+maths_mark+python_mark+rdbms_mark;
+alter table marks add percentage decimal(5,2);
+update marks set percentage =(total*100)/400;
+ALTER TABLE marks ADD average NUMBER(5,2);
+UPDATE marks SET average = (eng_mark + maths_mark + python_mark+rdbms_mark) / 3;
+select *from marks;
